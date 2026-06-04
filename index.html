@@ -58,22 +58,22 @@ tr:hover td{background:var(--surface2)}
   <div class="cards">
     <div class="card">
       <div class="card-label">Total P&amp;L</div>
-      <div class="card-value" style="color:#ff6b6b">$-121</div>
+      <div class="card-value" style="color:#6bcb77">+$0</div>
       <div class="card-sub">flat $100/bet</div>
     </div>
     <div class="card">
       <div class="card-label">Hit Rate</div>
-      <div class="card-value" style="color:#ff6b6b">42.9%</div>
-      <div class="card-sub">3W · 4L · 0 push</div>
+      <div class="card-value" style="color:#ff6b6b">0%</div>
+      <div class="card-sub">0W · 0L · 0 push</div>
     </div>
     <div class="card">
       <div class="card-label">Total Bets</div>
-      <div class="card-value" style="color:var(--accent)">7</div>
-      <div class="card-sub">7 with outcomes</div>
+      <div class="card-value" style="color:var(--accent)">0</div>
+      <div class="card-sub">0 with outcomes</div>
     </div>
     <div class="card">
       <div class="card-label">Best Bet Type</div>
-      <div class="card-value" style="color:var(--accent5);font-size:18px;padding-top:4px">HOME ML</div>
+      <div class="card-value" style="color:var(--accent5);font-size:18px;padding-top:4px">—</div>
       <div class="card-sub">by total profit</div>
     </div>
   </div>
@@ -82,38 +82,14 @@ tr:hover td{background:var(--surface2)}
   <div class="two-col">
     <div class="section">
       <div class="section-title">Cumulative P&amp;L</div>
-      
-      <div class="chart-wrap" >
+      <div style="color:#4a5568;text-align:center;padding:40px">No results tracked yet — picks will appear here after the first game day</div>
+      <div class="chart-wrap" style='display:none'>
         <canvas id="pnlChart"></canvas>
       </div>
     </div>
     <div class="section">
       <div class="section-title">By Bet Type</div>
-      
-      <table>
-        <thead><tr>
-          <th>Type</th><th>Record</th><th>Hit%</th><th>P&L</th>
-        </tr></thead>
-        <tbody>
-        <tr>
-          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">home ml</td>
-          <td style="font-family:'IBM Plex Mono',monospace">1W · 0L</td>
-          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">100%</td>
-          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$70</td>
-        </tr>
-        <tr>
-          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">away ml</td>
-          <td style="font-family:'IBM Plex Mono',monospace">1W · 2L</td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">33%</td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-91</td>
-        </tr>
-        <tr>
-          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">under</td>
-          <td style="font-family:'IBM Plex Mono',monospace">1W · 2L</td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">33%</td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
-        </tr></tbody>
-      </table>
+      <div class='empty'>No data yet</div>
     </div>
   </div>
 
@@ -131,94 +107,16 @@ tr:hover td{background:var(--surface2)}
   <!-- Recent results -->
   <div class="section">
     <div class="section-title">Recent Results (last 30)</div>
-    
-    <div style="overflow-x:auto">
-    <table>
-      <thead><tr>
-        <th>Date</th><th>Game</th><th>Bet</th><th>Odds</th><th>Stars</th><th>Result</th><th>P&L</th><th>Reasoning</th>
-      </tr></thead>
-      <tbody>
-        <tr>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-03</td>
-          <td style="font-size:12px">Baltimore Orioles @ Boston Red Sox</td>
-          <td style="color:#a0aec0;font-size:11px">home ml</td>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-143</td>
-          <td style="font-size:11px">⭐⭐⭐⭐</td>
-          <td><span style="background:#0d2010;color:#6bcb77;border:1px solid #6bcb7733;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">✅ WIN</span></td>
-          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$70</td>
-          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Early 5-2 2.95 ERA elite home. Baz 2-5 4.48 ERA. Clear win edge.</td>
-        </tr>
-        <tr>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-03</td>
-          <td style="font-size:12px">San Francisco Giants @ Milwaukee Brewers</td>
-          <td style="color:#a0aec0;font-size:11px">under</td>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-100</td>
-          <td style="font-size:11px">⭐⭐⭐⭐</td>
-          <td><span style="background:#0d2010;color:#6bcb77;border:1px solid #6bcb7733;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">✅ WIN</span></td>
-          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$100</td>
-          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Harrison 6-1 1.57 ERA double elite at dome. SF cold streak. Gap -1.8 at even money.</td>
-        </tr>
-        <tr>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-03</td>
-          <td style="font-size:12px">Toronto Blue Jays @ Atlanta Braves</td>
-          <td style="color:#a0aec0;font-size:11px">under</td>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-107</td>
-          <td style="font-size:11px">⭐⭐⭐⭐</td>
-          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
-          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Elder 4-3 2.50 ERA elite home. Gausman 3.13 ERA. Gap -1.8.</td>
-        </tr>
-        <tr>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-03</td>
-          <td style="font-size:12px">Colorado Rockies @ Los Angeles Angels</td>
-          <td style="color:#a0aec0;font-size:11px">away ml</td>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">+139</td>
-          <td style="font-size:11px">⭐⭐⭐⭐</td>
-          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
-          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">TIER 1 UPSET: Sugano 4-4 4.01 ERA vs Rodriguez 2-1 7.53 ERA. Win gap 2+, ERA advantage confirmed.</td>
-        </tr>
-        <tr>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-03</td>
-          <td style="font-size:12px">San Diego Padres @ Philadelphia Phillies</td>
-          <td style="color:#a0aec0;font-size:11px">away ml</td>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">+123</td>
-          <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
-          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">TIER 1 UPSET: Vasquez 5-3 3.28 ERA vs Nola 3-4 5.72 ERA. Win gap 2+, ERA advantage confirmed.</td>
-        </tr>
-        <tr>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-03</td>
-          <td style="font-size:12px">Chicago White Sox @ Minnesota Twins</td>
-          <td style="color:#a0aec0;font-size:11px">away ml</td>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">+109</td>
-          <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-          <td><span style="background:#0d2010;color:#6bcb77;border:1px solid #6bcb7733;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">✅ WIN</span></td>
-          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$109</td>
-          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">TIER 1 UPSET: Martin 8-1 2.00 ERA vs Prielipp 1-3 5.13 ERA. Win gap 7, ERA advantage confirmed.</td>
-        </tr>
-        <tr>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-03</td>
-          <td style="font-size:12px">Cleveland Guardians @ New York Yankees</td>
-          <td style="color:#a0aec0;font-size:11px">under</td>
-          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-111</td>
-          <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
-          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
-          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Schlittler 7-2 1.50 ERA double elite. Gap -3.3. Top play of the day.</td>
-        </tr></tbody>
-    </table>
-    </div>
+    <div class='empty'>No results tracked yet</div>
   </div>
 
 </div>
 
 <script>
 (function() {
-  const labels = ["2026-06-03"];
-  const values = [-121.07];
-  const colors = ["#ff6b6b"];
+  const labels = [];
+  const values = [];
+  const colors = [];
 
   if (!labels.length) return;
 
