@@ -58,22 +58,22 @@ tr:hover td{background:var(--surface2)}
   <div class="cards">
     <div class="card">
       <div class="card-label">Total P&amp;L</div>
-      <div class="card-value" style="color:#6bcb77">+$0</div>
+      <div class="card-value" style="color:#ff6b6b">$-426</div>
       <div class="card-sub">flat $100/bet</div>
     </div>
     <div class="card">
       <div class="card-label">Hit Rate</div>
-      <div class="card-value" style="color:#ff6b6b">0%</div>
-      <div class="card-sub">0W · 0L · 0 push</div>
+      <div class="card-value" style="color:#ff6b6b">30.0%</div>
+      <div class="card-sub">3W · 7L · 0 push</div>
     </div>
     <div class="card">
       <div class="card-label">Total Bets</div>
-      <div class="card-value" style="color:var(--accent)">0</div>
-      <div class="card-sub">0 with outcomes</div>
+      <div class="card-value" style="color:var(--accent)">11</div>
+      <div class="card-sub">10 with outcomes</div>
     </div>
     <div class="card">
       <div class="card-label">Best Bet Type</div>
-      <div class="card-value" style="color:var(--accent5);font-size:18px;padding-top:4px">—</div>
+      <div class="card-value" style="color:var(--accent5);font-size:18px;padding-top:4px">AWAY RL</div>
       <div class="card-sub">by total profit</div>
     </div>
   </div>
@@ -82,21 +82,81 @@ tr:hover td{background:var(--surface2)}
   <div class="two-col">
     <div class="section">
       <div class="section-title">Cumulative P&amp;L</div>
-      <div style="color:#4a5568;text-align:center;padding:40px">No results tracked yet — picks will appear here after the first game day</div>
-      <div class="chart-wrap" style='display:none'>
+      
+      <div class="chart-wrap" >
         <canvas id="pnlChart"></canvas>
       </div>
     </div>
     <div class="section">
       <div class="section-title">By Bet Type</div>
-      <div class='empty'>No data yet</div>
+      
+      <table>
+        <thead><tr>
+          <th>Type</th><th>Record</th><th>Hit%</th><th>P&L</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">away rl</td>
+          <td style="font-family:'IBM Plex Mono',monospace">1W · 0L</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">100%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$97</td>
+        </tr>
+        <tr>
+          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">home ml</td>
+          <td style="font-family:'IBM Plex Mono',monospace">0W · 1L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">0%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+        </tr>
+        <tr>
+          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">home margin</td>
+          <td style="font-family:'IBM Plex Mono',monospace">0W · 1L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">0%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+        </tr>
+        <tr>
+          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">under</td>
+          <td style="font-family:'IBM Plex Mono',monospace">2W · 3L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">40%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-123</td>
+        </tr>
+        <tr>
+          <td style="font-family:'IBM Plex Mono',monospace;color:#00e5ff">away ml</td>
+          <td style="font-family:'IBM Plex Mono',monospace">0W · 2L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">0%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-200</td>
+        </tr></tbody>
+      </table>
     </div>
   </div>
 
   <!-- By Sport -->
   <div class="section">
     <div class="section-title">By Sport</div>
-    <div class='empty'>No data yet</div>
+    
+    <table>
+      <thead><tr>
+        <th>Sport</th><th>Record</th><th>Hit%</th><th>P&L</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#00e5ff">🏉 AFL</td>
+          <td style="font-family:'IBM Plex Mono',monospace">0W · 1L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">0%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">🏒 NHL</td>
+          <td style="font-family:'IBM Plex Mono',monospace">0W · 1L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">0%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">⚾ MLB</td>
+          <td style="font-family:'IBM Plex Mono',monospace">3W · 5L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">38%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-226</td>
+        </tr></tbody>
+    </table>
   </div>
 
   <!-- Cross-check model comparison -->
@@ -108,24 +168,34 @@ tr:hover td{background:var(--surface2)}
       </tr></thead>
       <tbody>
         <tr>
-          <td style="color:#a0aec0">Claude — all picks</td>
-          <td colspan="3" style="color:#4a5568;font-size:11px">no graded bets yet</td>
+          <td style="color:#c084fc;font-weight:600">Claude — all picks</td>
+          <td style="font-family:'IBM Plex Mono',monospace">3W · 7L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">30%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-426</td>
         </tr>
         <tr>
           <td style="color:#a0aec0">↳ Gemini agreed</td>
-          <td colspan="3" style="color:#4a5568;font-size:11px">no graded bets yet</td>
+          <td style="font-family:'IBM Plex Mono',monospace">3W · 5L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">38%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-226</td>
         </tr>
         <tr>
           <td style="color:#a0aec0">↳ Gemini faded</td>
-          <td colspan="3" style="color:#4a5568;font-size:11px">no graded bets yet</td>
+          <td style="font-family:'IBM Plex Mono',monospace">0W · 2L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">0%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-200</td>
         </tr>
         <tr>
           <td style="color:#a0aec0">↳ ChatGPT agreed</td>
-          <td colspan="3" style="color:#4a5568;font-size:11px">no graded bets yet</td>
+          <td style="font-family:'IBM Plex Mono',monospace">3W · 6L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">33%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-326</td>
         </tr>
         <tr>
           <td style="color:#a0aec0">↳ ChatGPT faded</td>
-          <td colspan="3" style="color:#4a5568;font-size:11px">no graded bets yet</td>
+          <td style="font-family:'IBM Plex Mono',monospace">0W · 1L</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace">0%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
         </tr></tbody>
     </table>
     <div style="color:#4a5568;font-size:11px;margin-top:10px;line-height:1.5">
@@ -142,100 +212,141 @@ tr:hover td{background:var(--surface2)}
       <thead><tr>
         <th>Game</th><th>Bet</th><th>Odds</th><th>Stars</th><th>Reasoning</th>
       </tr></thead>
-      <tbody>
-            <tr>
-              <td style="font-size:12px">Toronto Blue Jays @ Atlanta Braves</td>
-              <td style="color:#00e5ff;font-size:11px">under · line 7.5</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-107</td>
-              <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · Sale 8-3 2.01 ERA · gap -2.5 · 68%</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Oakland Athletics @ Chicago Cubs</td>
-              <td style="color:#00e5ff;font-size:11px">away rl · line 1.5</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-103</td>
-              <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · Ginn ERA upset · safest OAK play · 62%</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Oakland Athletics @ Chicago Cubs</td>
-              <td style="color:#00e5ff;font-size:11px">away ml</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">+119</td>
-              <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · Ginn 2.87 ERA vs Imanaga 4.37 ERA · 60%</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Los Angeles Dodgers @ Arizona Diamondbacks</td>
-              <td style="color:#00e5ff;font-size:11px">under · line 9.0</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-112</td>
-              <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · Wrobleski 7-2 + ARI 2.8 RPG · gap -2.3</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Cleveland Guardians @ New York Yankees</td>
-              <td style="color:#00e5ff;font-size:11px">under · line 9.0</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-114</td>
-              <td style="font-size:11px">⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · Rodon 2.88 ERA · gap -2.6 · 60%</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Los Angeles Dodgers @ Arizona Diamondbacks</td>
-              <td style="color:#00e5ff;font-size:11px">away ml</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-137</td>
-              <td style="font-size:11px">⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · Wrobleski dominant · 58%</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Pittsburgh Pirates @ Houston Astros</td>
-              <td style="color:#00e5ff;font-size:11px">home ml</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-114</td>
-              <td style="font-size:11px">⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · Teng elite vs Jones debut · 56% · small only</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Western Bulldogs @ Hawthorn</td>
-              <td style="color:#00e5ff;font-size:11px">home margin</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">+120</td>
-              <td style="font-size:11px">⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">All 3 · HAW win by 1-39 · projected margin 14-32 · @2.20 ⚠️ verify venue</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Oakland Athletics @ Chicago Cubs</td>
-              <td style="color:#00e5ff;font-size:11px">under · line 10.5</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-117</td>
-              <td style="font-size:11px">⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">Auto only · Ginn vs 25mph wind · contested · small</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Vegas Golden Knights @ Carolina Hurricanes</td>
-              <td style="color:#00e5ff;font-size:11px">under · line 5.5</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">+110</td>
-              <td style="font-size:11px">⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">Auto+GPT · G1 was 9 goals risk · tiny unit</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Kansas City Royals @ Minnesota Twins</td>
-              <td style="color:#00e5ff;font-size:11px">under · line 9.0</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-101</td>
-              <td style="font-size:11px">⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">ChatGPT only · no elite arm · model gap -2.0</td>
-            </tr></tbody>
+      <tbody><tr><td colspan="5" style="color:#4a5568;text-align:center;padding:20px">No picks for today yet — bot runs at 5am AEST</td></tr></tbody>
     </table>
   </div>
 
   <!-- Recent results -->
   <div class="section">
     <div class="section-title">Recent Results (last 30)</div>
-    <div class='empty'>No results tracked yet</div>
+    
+    <div style="overflow-x:auto">
+    <table>
+      <thead><tr>
+        <th>Date</th><th>Game</th><th>Bet</th><th>Odds</th><th>Stars</th><th>Result</th><th>P&L</th><th>Reasoning</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Kansas City Royals @ Minnesota Twins</td>
+          <td style="color:#a0aec0;font-size:11px">under</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-101</td>
+          <td style="font-size:11px">⭐⭐⭐</td>
+          <td><span style="background:#201800;color:#ffd93d;border:1px solid #ffd93d33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">⏳ PENDING</span></td>
+          <td style="color:#4a5568;font-family:'IBM Plex Mono',monospace">—</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">ChatGPT only · no elite arm · model gap -2.0</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Vegas Golden Knights @ Carolina Hurricanes</td>
+          <td style="color:#a0aec0;font-size:11px">under</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">+110</td>
+          <td style="font-size:11px">⭐⭐⭐</td>
+          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Auto+GPT · G1 was 9 goals risk · tiny unit</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Oakland Athletics @ Chicago Cubs</td>
+          <td style="color:#a0aec0;font-size:11px">under</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-117</td>
+          <td style="font-size:11px">⭐⭐⭐</td>
+          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Auto only · Ginn vs 25mph wind · contested · small</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Western Bulldogs @ Hawthorn</td>
+          <td style="color:#a0aec0;font-size:11px">home margin</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">+120</td>
+          <td style="font-size:11px">⭐⭐⭐⭐</td>
+          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · HAW win by 1-39 · projected margin 14-32 · @2.20 ⚠️ verify venue</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Pittsburgh Pirates @ Houston Astros</td>
+          <td style="color:#a0aec0;font-size:11px">home ml</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-114</td>
+          <td style="font-size:11px">⭐⭐⭐</td>
+          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · Teng elite vs Jones debut · 56% · small only</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Los Angeles Dodgers @ Arizona Diamondbacks</td>
+          <td style="color:#a0aec0;font-size:11px">away ml</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-137</td>
+          <td style="font-size:11px">⭐⭐⭐⭐</td>
+          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · Wrobleski dominant · 58%</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Cleveland Guardians @ New York Yankees</td>
+          <td style="color:#a0aec0;font-size:11px">under</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-114</td>
+          <td style="font-size:11px">⭐⭐⭐⭐</td>
+          <td><span style="background:#0d2010;color:#6bcb77;border:1px solid #6bcb7733;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">✅ WIN</span></td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$88</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · Rodon 2.88 ERA · gap -2.6 · 60%</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Los Angeles Dodgers @ Arizona Diamondbacks</td>
+          <td style="color:#a0aec0;font-size:11px">under</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-112</td>
+          <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
+          <td><span style="background:#0d2010;color:#6bcb77;border:1px solid #6bcb7733;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">✅ WIN</span></td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$89</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · Wrobleski 7-2 + ARI 2.8 RPG · gap -2.3</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Oakland Athletics @ Chicago Cubs</td>
+          <td style="color:#a0aec0;font-size:11px">away ml</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">+119</td>
+          <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
+          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · Ginn 2.87 ERA vs Imanaga 4.37 ERA · 60%</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Oakland Athletics @ Chicago Cubs</td>
+          <td style="color:#a0aec0;font-size:11px">away rl</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-103</td>
+          <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
+          <td><span style="background:#0d2010;color:#6bcb77;border:1px solid #6bcb7733;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">✅ WIN</span></td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$97</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · Ginn ERA upset · safest OAK play · 62%</td>
+        </tr>
+        <tr>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">2026-06-05</td>
+          <td style="font-size:12px">Toronto Blue Jays @ Atlanta Braves</td>
+          <td style="color:#a0aec0;font-size:11px">under</td>
+          <td style="color:#718096;font-family:'IBM Plex Mono',monospace;font-size:11px">-107</td>
+          <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
+          <td><span style="background:#200d0d;color:#ff6b6b;border:1px solid #ff6b6b33;padding:2px 8px;border-radius:20px;font-size:10px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px">❌ LOSS</span></td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-100</td>
+          <td style="color:#4a5568;font-size:10px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">All 3 · Sale 8-3 2.01 ERA · gap -2.5 · 68%</td>
+        </tr></tbody>
+    </table>
+    </div>
   </div>
 
 </div>
 
 <script>
 (function() {
-  const labels = [];
-  const values = [];
-  const colors = [];
+  const labels = ["2026-06-05"];
+  const values = [-425.91];
+  const colors = ["#ff6b6b"];
 
   if (!labels.length) return;
 
