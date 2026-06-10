@@ -177,6 +177,28 @@ tr:hover td{background:var(--surface2)}
     </table>
   </div>
 
+  <!-- P&L by Signal — rolling mini-backtest of each rule -->
+  <div class="section">
+    <div class="section-title">📐 P&L by Signal — which rule is actually winning?</div>
+    
+    <table>
+      <thead><tr>
+        <th>Signal (rule)</th><th>Record</th><th>Hit%</th><th>P&L</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#00e5ff">• Untagged<br><span style="color:#4a5568;font-size:10px">pre-signal bets</span></td>
+          <td style="font-family:'IBM Plex Mono',monospace">30W · 32L</td>
+          <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">48%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-148</td>
+        </tr></tbody>
+    </table>
+    <div style="color:#4a5568;font-size:11px;margin-top:10px;line-height:1.5">
+      Each row = a CLAUDE.md rule. This is your edge validating live vs. the backtest.<br>
+      Needs ~30+ graded bets per row before a number means anything — small samples are noise.
+    </div>
+  </div>
+
   <!-- Today's picks -->
   <div class="section">
     <div class="section-title">Today's Picks — 2026-06-10</div>
