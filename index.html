@@ -51,7 +51,7 @@ tr:hover td{background:var(--surface2)}
       <div class="logo">Betting Bot</div>
       <div class="sub">MLB · Daily Analysis · Auto P&amp;L Tracker</div>
     </div>
-    <div class="updated">Last updated<br>Friday 21 August 2026</div>
+    <div class="updated">Last updated<br>Saturday 22 August 2026</div>
   </div>
 
   <!-- Summary cards -->
@@ -187,6 +187,88 @@ tr:hover td{background:var(--surface2)}
           <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-500</td>
         </tr></tbody>
     </table>
+  </div>
+
+  <!-- 📅 Trends: by month + by day of week -->
+  <div class="section">
+    <div class="section-title">📅 Trends — by month & day of week</div>
+    
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:#4a5568;margin-bottom:8px">BY MONTH</div>
+        <table>
+          <thead><tr><th>Month</th><th>Record</th><th>Hit%</th><th>P&L</th></tr></thead>
+          <tbody>
+        <tr>
+          <td style="color:#00e5ff">Jun 2026</td>
+          <td style="font-family:'IBM Plex Mono',monospace">113W · 87L</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">56%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$2756</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Jul 2026</td>
+          <td style="font-family:'IBM Plex Mono',monospace">71W · 66L</td>
+          <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">52%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$3598</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Aug 2026</td>
+          <td style="font-family:'IBM Plex Mono',monospace">61W · 40L</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">60%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$10900</td>
+        </tr></tbody>
+        </table>
+      </div>
+      <div style="flex:1;min-width:260px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:#4a5568;margin-bottom:8px">BY DAY OF WEEK (AEST)</div>
+        <table>
+          <thead><tr><th>Day</th><th>Record</th><th>Hit%</th><th>P&L</th></tr></thead>
+          <tbody>
+        <tr>
+          <td style="color:#00e5ff">Mon</td>
+          <td style="font-family:'IBM Plex Mono',monospace">41W · 26L</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">61%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$4038</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Tue</td>
+          <td style="font-family:'IBM Plex Mono',monospace">22W · 26L</td>
+          <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">46%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-4215</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Wed</td>
+          <td style="font-family:'IBM Plex Mono',monospace">42W · 22L</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">66%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$8637</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Thu</td>
+          <td style="font-family:'IBM Plex Mono',monospace">30W · 28L</td>
+          <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">52%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$3369</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Fri</td>
+          <td style="font-family:'IBM Plex Mono',monospace">21W · 24L</td>
+          <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">47%</td>
+          <td style="color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-weight:600">$-88</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Sat</td>
+          <td style="font-family:'IBM Plex Mono',monospace">40W · 32L</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">56%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$4087</td>
+        </tr>
+        <tr>
+          <td style="color:#00e5ff">Sun</td>
+          <td style="font-family:'IBM Plex Mono',monospace">49W · 35L</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace">58%</td>
+          <td style="color:#6bcb77;font-family:'IBM Plex Mono',monospace;font-weight:600">+$1426</td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <!-- P&L by Signal — rolling mini-backtest of each rule -->
@@ -336,33 +418,12 @@ tr:hover td{background:var(--surface2)}
 
   <!-- Today's picks -->
   <div class="section">
-    <div class="section-title">Today's Picks — 2026-08-21</div>
+    <div class="section-title">Today's Picks — 2026-08-22</div>
     <table>
       <thead><tr>
         <th>Game</th><th>Bet</th><th>Odds</th><th>Stars</th><th>Reasoning</th>
       </tr></thead>
-      <tbody>
-            <tr>
-              <td style="font-size:12px">Seattle Mariners @ Milwaukee Brewers</td>
-              <td style="color:#00e5ff;font-size:11px">away ml</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">+114</td>
-              <td style="font-size:11px">⭐⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">Kirby 8-9 3.89 ERA vs Gasser 3-5 4.54 ERA; 5-win gap; ERA strictly lower (3.89 < 4.54) — textbook tier1 away-dog upset profile</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Athletics @ Kansas City Royals</td>
-              <td style="color:#00e5ff;font-size:11px">under · line 8.5</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">-110</td>
-              <td style="font-size:11px">⭐⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">Dobnak 1.73 ERA confirmed 41.2 IP 6 GS (sub-2.00 bucket) + Jump 5W (dual elite) — projected 5.4 runs vs 8.5 line, gap -3.1</td>
-            </tr>
-            <tr>
-              <td style="font-size:12px">Brisbane Lions @ Collingwood Magpies</td>
-              <td style="color:#00e5ff;font-size:11px">home ml</td>
-              <td style="color:#ffd93d;font-family:'IBM Plex Mono',monospace">+270</td>
-              <td style="font-size:11px">⭐⭐⭐</td>
-              <td style="color:#718096;font-size:10px">Stats Insider 33% vs market 27% implied (+6% edge); Brisbane away-fav AFL trap (-6.4% ROI); Collingwood home dog value pocket at MCG</td>
-            </tr></tbody>
+      <tbody><tr><td colspan="5" style="color:#4a5568;text-align:center;padding:20px">No picks for today yet — bot runs at 5am AEST</td></tr></tbody>
     </table>
   </div>
 
