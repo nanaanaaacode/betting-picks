@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Betting Bot Playbook</title>
+<style>
+  html,body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+
+<meta name="description" content="Per-sport market map and the daily run pipeline for the betting bot — what each sport bets and where it skips.">
+<style>
+  /* Layout: a reference sheet — pipeline strip up top, then a sport×market matrix, then the rules that govern stars & stakes. */
+  :root{
+    --bg:#f5f7f4; --surface:#ffffff; --surface-2:#eef1ec; --fg:#161a16; --muted:#5c6459;
+    --border:#e1e5dd; --accent:#1e9e5a; --ink:#0a7ea4;
+    --good:#1e9e5a; --warn:#b8791c; --crit:#c23b3b;
+    --good-bg:#e4f3ea; --warn-bg:#f6eeda; --crit-bg:#f6e3e3;
+    --shadow:0 1px 2px rgba(20,30,20,.06),0 4px 14px rgba(20,30,20,.05);
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --sans:"IBM Plex Sans",system-ui,sans-serif;
+    --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#0e1310; --surface:#161d18; --surface-2:#1c251f; --fg:#e8ece7; --muted:#8c998d;
+    --border:#263128; --accent:#4ade80; --ink:#38bdf8;
+    --good:#4ade80; --warn:#e0a94a; --crit:#f0736f;
+    --good-bg:#13271b; --warn-bg:#2a2214; --crit-bg:#2c1818;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0e1310; --surface:#161d18; --surface-2:#1c251f; --fg:#e8ece7; --muted:#8c998d;
+    --border:#263128; --accent:#4ade80; --ink:#38bdf8;
+    --good:#4ade80; --warn:#e0a94a; --crit:#f0736f;
+    --good-bg:#13271b; --warn-bg:#2a2214; --crit-bg:#2c1818;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5;
+    -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1040px;margin:0 auto;padding-block:38px;padding-left:20px;padding-right:20px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin:0 0 10px}
+  h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,5.5vw,42px);line-height:1.05;
+    margin:0 0 10px;text-wrap:balance;letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:15px;max-width:60ch;margin:0 0 6px}
+  h2{font-family:var(--display);font-weight:700;font-size:20px;margin:40px 0 4px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+  section{margin-top:6px}
+
+  /* pipeline */
+  .pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+  .step{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;
+    box-shadow:var(--shadow);position:relative;min-width:0}
+  .step .n{font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:600}
+  .step .t{font-weight:600;font-size:13.5px;margin:3px 0 4px}
+  .step .d{color:var(--muted);font-size:12px;line-height:1.45}
+  .step .when{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-top:7px;
+    letter-spacing:.02em;text-transform:uppercase}
+
+  /* matrix */
+  .scroll{overflow-x:auto;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);margin-top:6px}
+  table{border-collapse:collapse;width:100%;min-width:720px;background:var(--surface);font-size:13px}
+  thead th{background:var(--surface-2);text-align:left;padding:12px 13px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--border);white-space:nowrap}
+  tbody td{padding:11px 13px;border-bottom:1px solid var(--border);vertical-align:top;min-width:0}
+  tbody tr:last-child td{border-bottom:none}
+  .sport{white-space:nowrap}
+  .sport .name{font-family:var(--display);font-weight:700;font-size:15px;display:flex;align-items:center;gap:7px}
+  .sport .meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:3px;letter-spacing:.02em}
+  .cell .chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;
+    font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px;
+    border:1px solid transparent;white-space:nowrap}
+  .chip.edge{color:var(--good);background:var(--good-bg);border-color:color-mix(in srgb,var(--good) 30%,transparent)}
+  .chip.exp{color:var(--warn);background:var(--warn-bg);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+  .chip.no{color:var(--crit);background:var(--crit-bg);border-color:color-mix(in srgb,var(--crit) 28%,transparent)}
+  .cell .note{color:var(--muted);font-size:11.5px;line-height:1.4;margin-top:5px;display:block;max-width:34ch}
+  .cell .note b{color:var(--fg);font-weight:600}
+
+  /* rules grid */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:6px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 10px;font-size:13px;font-family:var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+  .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px dashed var(--border)}
+  .row:last-child{border-bottom:none}
+  .row .k{font-size:12.5px}
+  .row .v{font-family:var(--mono);font-size:12px;font-weight:600;white-space:nowrap}
+  .stars{color:var(--accent);letter-spacing:1px}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;font-size:11.5px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);
+    font-size:11.5px;font-family:var(--mono);line-height:1.6}
+  .drop{display:inline-block;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    padding:1px 6px;margin:2px 3px 2px 0;font-size:11px;color:var(--fg)}
+</style>
+</head>
+<body>
+<div style="max-width:1040px;margin:0 auto;padding:14px 20px 0"><a href="index.html" style="font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor">← Dashboard</a></div>
+
+
+<div class="wrap">
+  <p class="eyebrow">Decision reference · AEST</p>
+  <h1>Betting Bot Playbook</h1>
+  <p class="lede">What each sport actually bets, which markets it skips, and the daily run that produces it. Everything here mirrors the rules enforced in <span style="font-family:var(--mono);font-size:13px">CLAUDE.md</span> and the sanitizer.</p>
+
+  <section>
+    <h2>The daily run</h2>
+    <p class="sub">One planner sets the day's timing from the real schedule; the pick run is dynamic, not a fixed 5am.</p>
+    <div class="pipe">
+      <div class="step"><div class="n">01</div><div class="t">Planner</div><div class="d">Reads tomorrow's schedule, programs the pick + result one-shots. Pick = 1h before the first game; pulls earlier if an NBA/NHL game starts first.</div><div class="when">~6pm prev day</div></div>
+      <div class="step"><div class="n">02</div><div class="t">Pick run</div><div class="d">Pre-fetches MLB pitchers/odds + batting form + AFL/NBA/NHL/NRL/AFLW odds → full analysis → sanitize → Discord + dashboard.</div><div class="when">~1h before 1st game · 5am fallback</div></div>
+      <div class="step"><div class="n">03</div><div class="t">NFL run</div><div class="d">Separate job — the Sunday slate kicks ~3am AEST, before the main run. Own picks file + own Discord post.</div><div class="when">~1h before kickoff</div></div>
+      <div class="step"><div class="n">04</div><div class="t">CLV capture</div><div class="d">Snapshots each pick's closing line near game time — the leading edge indicator.</div><div class="when">every 30 min</div></div>
+      <div class="step"><div class="n">05</div><div class="t">Result run</div><div class="d">Grades every pick (ESPN / statsapi / Odds API scores), updates P&L, posts results + refreshes the dashboard.</div><div class="when">~30 min after last game</div></div>
+      <div class="step"><div class="n">06</div><div class="t">Watchdog</div><div class="d">Recovers a missed pick/NFL/result run and re-posts results that graded but never reached Discord.</div><div class="when">6:30am + intervals</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Sport × market map</h2>
+    <p class="sub">The core question — for each sport, where do we take a side and where do we pass?</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Sport</th><th>Moneyline</th><th>Total (O/U)</th><th>Handicap / line</th><th>Props</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="sport"><div class="name">⚾ MLB</div><div class="meta">$500 · backtested · the core</div></td>
+            <td class="cell"><span class="chip edge">✅ Edge</span><span class="note"><b>Upset alert only.</b> Away dog + 2+ win gap + dog ERA ≤ fav ERA +0.20 → the 5★ play. Home dog, same filter → <b>home_upset</b>, 4★. No favourites, no blind dogs.</span></td>
+            <td class="cell"><span class="chip edge">✅ Under</span><span class="note"><b>Under only</b>, gap ≤ −2.5 + a 2nd signal, 4★ cap. <b>Overs discontinued.</b> 3★ unders dropped before posting.</span></td>
+            <td class="cell"><span class="chip no">🚫 Skip</span><span class="note">Run line mostly passes — only both SP 0-5/0-6 → consider both +1.5. Never −1.5 unless truly &gt;55%.</span></td>
+            <td class="cell"><span class="chip no">— None</span></td>
+          </tr>
+          <tr>
+            <td class="sport"><div class="name">🏉 AFL</div><div class="meta">$500 · backtested</div></td>
+            <td class="cell"><span class="chip edge">✅ Only market</span><span class="note">Stats Insider win prob. <b>Favour home sides</b> (home dogs are the sweet spot), distrust away. 4★ cap.</span></td>
+            <td class="cell"><span class="chip no">🚫 Never</span><span class="note">Backtested no edge — dropped by code.</span></td>
+            <td class="cell"><span class="chip no">🚫 Never</span><span class="note">Backtested breakeven — dropped by code.</span></td>
+            <td class="cell"><span class="chip no">— None</span></td>
+          </tr>
+          <tr>
+            <td class="sport"><div class="name">🏒 NHL</div><div class="meta">$100 · experimental · main run</div></td>
+            <td class="cell"><span class="chip edge">✅ One spot</span><span class="note"><b>B2B fade</b> — road team on a back-to-back, home rested → back home ML (<b>nhl_b2b_fade</b>, +4.1% backtest), 3★ for now. Else experimental; goalie is the #1 factor.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Per-game read only, 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Puck line, per-game read, 3★ cap.</span></td>
+            <td class="cell"><span class="chip no">— None</span></td>
+          </tr>
+          <tr>
+            <td class="sport"><div class="name">🏀 NBA</div><div class="meta">$100 · experimental · main run</div></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">The only real angle — an injury/rest lean where your read disagrees with the line. 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Allowed, but backtests as a vig-loser — only a genuine per-game lean, never a system.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Spread allowed; pure coinflip in the backtest — lean only.</span></td>
+            <td class="cell"><span class="chip no">🚫 Excluded</span><span class="note">Wrong tool (news-speed edge) + high hold. Left out.</span></td>
+          </tr>
+          <tr>
+            <td class="sport"><div class="name">🏈 NFL</div><div class="meta">$100 · experimental · own run</div></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Per-game read (injuries, QB, short week, weather). 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Per-game read, 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Spread (home/away line), 3★ cap.</span></td>
+            <td class="cell"><span class="chip no">🚫 No edge</span><span class="note">TD props backtested −9% to −58% — dropped.</span></td>
+          </tr>
+          <tr>
+            <td class="sport"><div class="name">🏉 NRL</div><div class="meta">$100 · experimental · main run</div></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Home-ground sport. Per-game read, 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Per-game read, 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Line, per-game read, 3★ cap.</span></td>
+            <td class="cell"><span class="chip no">— None</span></td>
+          </tr>
+          <tr>
+            <td class="sport"><div class="name">🏉 AFLW</div><div class="meta">$100 · experimental · main run</div></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Can't backtest (no history). Home-ground sport, 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Per-game read, 3★ cap.</span></td>
+            <td class="cell"><span class="chip exp">⚙️ Exp.</span><span class="note">Line, per-game read, 3★ cap.</span></td>
+            <td class="cell"><span class="chip no">— None</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--good)"></span> Edge — backtested +EV, bet it</span>
+      <span><span class="dot" style="background:var(--warn)"></span> Experimental — genuine leans only, kill if it loses</span>
+      <span><span class="dot" style="background:var(--crit)"></span> Skip / no edge — pass or dropped by code</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Stars & stakes</h2>
+    <p class="sub">Confidence is hit-probability, not value. The caps exist because every miscalibration below cost real money.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Star caps</h3>
+        <div class="row"><span class="k"><span class="stars">★★★★★</span> — away-dog upset ML</span><span class="v">only this</span></div>
+        <div class="row"><span class="k"><span class="stars">★★★★</span> cap — MLB unders, home_upset, AFL ML</span><span class="v">4★ max</span></div>
+        <div class="row"><span class="k"><span class="stars">★★★</span> cap — all experimental sports</span><span class="v">3★ max</span></div>
+        <div class="row"><span class="k">Totals must be 4★+ (no 3★ totals)</span><span class="v">enforced</span></div>
+        <div class="row"><span class="k">Moneylines may be 3★</span><span class="v">ok</span></div>
+      </div>
+      <div class="card">
+        <h3>Stake tiers</h3>
+        <div class="row"><span class="k">MLB · AFL — backtested</span><span class="v">$500</span></div>
+        <div class="row"><span class="k">NBA · NFL · NHL · NRL · AFLW</span><span class="v">$100</span></div>
+        <div class="row"><span class="k">Multis (parlays)</span><span class="v">tracking only</span></div>
+      </div>
+      <div class="card">
+        <h3>Dropped before posting</h3>
+        <div style="margin-top:2px">
+          <span class="drop">MLB overs</span>
+          <span class="drop">3★ totals</span>
+          <span class="drop">non-ML AFL</span>
+          <span class="drop">upset tag on a favourite</span>
+          <span class="drop">away-fav / home-fav ML</span>
+          <span class="drop">duplicates</span>
+          <span class="drop">experimental &gt; 3★</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">
+    Signals tracked separately: tier1/tier2_upset · home_upset · total · handicap · nhl_b2b_fade · nba/nfl/nhl/nrl/aflw_experimental · other.<br>
+    Retired: World Cup / soccer (returns ~2030). · Winter note: once MLB ends, NBA becomes the main-run anchor automatically.
+  </p>
+</div>
+
+</body>
+</html>
